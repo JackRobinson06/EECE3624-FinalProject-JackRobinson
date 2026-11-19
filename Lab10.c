@@ -16,7 +16,7 @@
 
 int main(void)
 {
-    unsigned char spin = 0;
+    unsigned char wiggle = 0;
     unsigned char lastButton = 0;
     unsigned char button;
     char command;
@@ -36,13 +36,13 @@ int main(void)
 
         if (button == 1 && lastButton == 0)
         {
-            spin = !spin;
+            wiggle = !wiggle;
         }
 
         lastButton = button;
 
         // Choose command to send
-        if (spin == 1)
+        if (wiggle == 1)
             command = 'A';
         else if (!(PINB & (1 << UP)))
             command = 'U';

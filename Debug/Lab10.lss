@@ -21,11 +21,11 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
   8 .debug_frame  00000078  00000000  00000000  00001ae0  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    000004ee  00000000  00000000  00001b58  2**0
+  9 .debug_str    000004f0  00000000  00000000  00001b58  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_loc    0000013d  00000000  00000000  00002046  2**0
+ 10 .debug_loc    0000013d  00000000  00000000  00002048  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 00000030  00000000  00000000  00002183  2**0
+ 11 .debug_ranges 00000030  00000000  00000000  00002185  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -145,7 +145,7 @@ Disassembly of section .text:
 
 int main(void)
 {
-    unsigned char spin = 0;
+    unsigned char wiggle = 0;
     unsigned char lastButton = 0;
   ba:	20 e0       	ldi	r18, 0x00	; 0
 #define LEFT PB2
@@ -153,7 +153,7 @@ int main(void)
 
 int main(void)
 {
-    unsigned char spin = 0;
+    unsigned char wiggle = 0;
   bc:	d0 e0       	ldi	r29, 0x00	; 0
     uart0_init(BaudRate, DataBits, StopBits, NoParity);
 
@@ -175,7 +175,7 @@ int main(void)
   d0:	21 11       	cpse	r18, r1
   d2:	04 c0       	rjmp	.+8      	; 0xdc <main+0x3e>
         {
-            spin = !spin;
+            wiggle = !wiggle;
   d4:	81 2f       	mov	r24, r17
   d6:	d1 11       	cpse	r29, r1
   d8:	80 2f       	mov	r24, r16
@@ -185,7 +185,7 @@ int main(void)
         lastButton = button;
 
         // Choose command to send
-        if (spin == 1)
+        if (wiggle == 1)
   dc:	d1 30       	cpi	r29, 0x01	; 1
   de:	51 f0       	breq	.+20     	; 0xf4 <main+0x56>
             command = 'A';
@@ -213,7 +213,7 @@ int main(void)
         lastButton = button;
 
         // Choose command to send
-        if (spin == 1)
+        if (wiggle == 1)
             command = 'A';
   f4:	81 e4       	ldi	r24, 0x41	; 65
   f6:	07 c0       	rjmp	.+14     	; 0x106 <main+0x68>
@@ -254,7 +254,7 @@ int main(void)
  118:	00 00       	nop
         if (button == 1 && lastButton == 0)
         {
-            spin = !spin;
+            wiggle = !wiggle;
         }
 
         lastButton = button;
